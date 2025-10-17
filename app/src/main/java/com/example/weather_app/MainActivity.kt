@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -53,8 +54,11 @@ fun WeatherScreen(conditionTitle: String, location: String, temperature: String)
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize())
         Column(
-            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 120.dp)
 
         ){
             Text(
@@ -63,7 +67,7 @@ fun WeatherScreen(conditionTitle: String, location: String, temperature: String)
                 textAlign = TextAlign.Center,
                 color = Color.White,
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(2.dp)
             )
 
             Text(
@@ -72,11 +76,11 @@ fun WeatherScreen(conditionTitle: String, location: String, temperature: String)
                 fontStyle = FontStyle.Italic,
                 color = Color.White,
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(2.dp)
             )
             Text(
                 text = temperature,
-                fontSize = 36.sp,
+                fontSize = 96.sp,
                 color = Color.White,
                 modifier = Modifier
                     .padding(16.dp)
