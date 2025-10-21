@@ -30,6 +30,8 @@ import com.example.weather_app.ui.theme.Weather_AppTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.weather_app.ui.viewmodel.WeatherViewModel
+import com.example.weather_app.ui.screen.WeatherScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,65 +51,5 @@ class MainActivity : ComponentActivity() {
 
             }
         }
-    }
-}
-
-@Composable
-fun WeatherScreen(conditionTitle: String, location: String, temperature: String){
-    Box(modifier = Modifier.fillMaxSize()){
-        val backgroundImage = painterResource(R.drawable.zurich)
-        Image(
-            painter = backgroundImage,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize())
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 120.dp)
-
-        ){
-            Text(
-                text = conditionTitle,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                color = Color.White,
-                modifier = Modifier
-                    .padding(2.dp)
-            )
-
-            Text(
-                text = location,
-                fontSize = 16.sp,
-                fontStyle = FontStyle.Italic,
-                color = Color.White,
-                modifier = Modifier
-                    .padding(2.dp)
-            )
-            Text(
-                text = temperature,
-                fontSize = 96.sp,
-                color = Color.White,
-                modifier = Modifier
-                    .padding(16.dp)
-
-            )
-
-        }
-
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun WeatherScreenPreview() {
-    Weather_AppTheme {
-        WeatherScreen(
-            conditionTitle = stringResource(R.string.condiitonTitle),
-            location = stringResource(R.string.location),
-            temperature = stringResource(R.string.temperature))
     }
 }
