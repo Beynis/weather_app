@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +27,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.weather_app.ui.theme.Weather_AppTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.weather_app.ui.viewmodel.WeatherViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,12 +37,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Weather_AppTheme {
+                val vm: WeatherViewModel = viewModel()
+                val uiState by vm.uiState.collectAsStateWithLifecycle()
 
-                    WeatherScreen(
-                        conditionTitle = stringResource(R.string.condiitonTitle),
-                        location = stringResource(R.string.location),
-                        temperature = stringResource(R.string.temperature)
-                    )
+                WeatherScreen(
+                    conditionTitle = uiState.title,
+                    location = "Zurich",
+                    temperature = uiState.currentTemp?.let { "${"%.1f".format(it)}°C" } ?: "--"
+                )
+
 
             }
         }
